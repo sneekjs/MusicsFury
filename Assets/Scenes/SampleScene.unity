@@ -603,8 +603,9 @@ GameObject:
   - component: {fileID: 1764603625}
   - component: {fileID: 1764603624}
   - component: {fileID: 1764603623}
+  - component: {fileID: 1764603627}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,3 +687,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764603627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764603622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80cf68e124fe4f478d2f040ec24fcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultOrb:
+    StartingSpeed: 0.2
+    DestroyDelay: 2
+    UseAcceleration: 1
+    AccelerationMultiplier: 0
+    MoveToTarget: 0
+    TargetLocation: {x: 0, y: 0, z: 0}
+  Spawnable: {fileID: 5858368948943860956, guid: c1fff035337ba2f409425465b64b776d, type: 3}
+  RotationSpeed: 20

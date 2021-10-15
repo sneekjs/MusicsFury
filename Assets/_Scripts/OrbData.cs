@@ -7,6 +7,7 @@ using System;
 public class OrbData
 {
     public float StartingSpeed;
+    public float DestroyDelay;
 
     public bool UseAcceleration;
     public float AccelerationMultiplier;
