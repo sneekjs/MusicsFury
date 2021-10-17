@@ -7,34 +7,40 @@ public class BallSpawner : MonoBehaviour
     public OrbData defaultOrb;
     public GameObject Spawnable;
     public float RotationSpeed;
+    public List<AttackData> attacks = new List<AttackData>();
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        StartCoroutine(AttackPattern());
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(Vector3.up * Time.deltaTime * RotationSpeed);
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            StartCoroutine(CrossAttack());
-        }
+    }
 
-        if (Input.GetKeyDown(KeyCode.C))
+    private IEnumerator AttackPattern()
+    {
+        for (int i = 0; i < attacks.Count; i++)
         {
-            CircleAttack();
-        }
+            yield return new WaitForSecondsRealtime(3);
 
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            HalfCircle();
+            switch (attacks[i].type)
+            {
+                case AttackData.AttackType.Cross:
+                    StartCoroutine(CrossAttack(attacks[i].orbBehaviour));
+                    break;
+                case AttackData.AttackType.Cirlce:
+                    CircleAttack(attacks[i].orbBehaviour);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    private IEnumerator CrossAttack()
+    private IEnumerator CrossAttack(OrbData orbBehaviour)
     {
         
         for (int i = 0; i < 10; i++)
@@ -44,19 +50,19 @@ public class BallSpawner : MonoBehaviour
             {
                 Orb data = Instantiate(Spawnable, transform.position, bulletRot).GetComponent<Orb>();
                 bulletRot *= Quaternion.Euler(0, 45, 0);
-                data.StartData = defaultOrb;
+                data.StartData = orbBehaviour;
             }
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    private void CircleAttack()
+    private void CircleAttack(OrbData orbBehaviour)
     {
         Quaternion bulletRot = transform.rotation;
         for (int x = 0; x < 190; x++)
         {
             Orb data = Instantiate(Spawnable, transform.position, bulletRot).GetComponent<Orb>();
-            data.StartData = defaultOrb;
+            data.StartData = orbBehaviour;
             bulletRot *= Quaternion.Euler(0, 2, 0);
         }
     }

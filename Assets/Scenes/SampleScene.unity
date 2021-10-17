@@ -708,3 +708,28 @@ MonoBehaviour:
     TargetLocation: {x: 0, y: 0, z: 0}
   Spawnable: {fileID: 5858368948943860956, guid: c1fff035337ba2f409425465b64b776d, type: 3}
   RotationSpeed: 20
+  attacks:
+  - type: 0
+    orbBehaviour:
+      StartingSpeed: 5
+      DestroyDelay: 3
+      UseAcceleration: 0
+      AccelerationMultiplier: 0
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 1
+    orbBehaviour:
+      StartingSpeed: 0.1
+      DestroyDelay: 3
+      UseAcceleration: 1
+      AccelerationMultiplier: 1.01
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 1
+    orbBehaviour:
+      StartingSpeed: 5
+      DestroyDelay: 3
+      UseAcceleration: 0
+      AccelerationMultiplier: 1.1
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}

@@ -6,6 +6,7 @@ public class Orb : MonoBehaviour
 {
     public OrbData StartData;
     private float StartSpeed;
+    private float accelerationMultiplier;
     private float DestroyDelay;
     private bool usesAcceleration;
     
@@ -18,6 +19,7 @@ public class Orb : MonoBehaviour
         StartSpeed = StartData.StartingSpeed;
         DestroyDelay = StartData.DestroyDelay;
         usesAcceleration = StartData.UseAcceleration;
+        accelerationMultiplier = StartData.AccelerationMultiplier;
 
         currentSpeed = StartSpeed;
         Destroy(gameObject, DestroyDelay);
@@ -30,7 +32,7 @@ public class Orb : MonoBehaviour
 
         if (usesAcceleration)
         {
-            currentSpeed *= 1.1f;
+            currentSpeed *= accelerationMultiplier;
         }
     }
 }
