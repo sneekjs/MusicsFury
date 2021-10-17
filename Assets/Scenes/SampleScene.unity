@@ -834,12 +834,45 @@ MonoBehaviour:
     MoveToTarget: 0
     TargetLocation: {x: 0, y: 0, z: 0}
   Spawnable: {fileID: 5858368948943860956, guid: c1fff035337ba2f409425465b64b776d, type: 3}
+  AirdropSpawnable: {fileID: 5199825300904926090, guid: 82fe3bbe9209ec843b31d6cfe6280821, type: 3}
   RotationSpeed: 20
   testAttacks:
-  - type: 2
+  - type: 3
     orbBehaviour:
-      StartingSpeed: 5
-      DestroyDelay: 5
+      StartingSpeed: 0
+      DestroyDelay: 0
+      UseAcceleration: 0
+      AccelerationMultiplier: 0
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 3
+    orbBehaviour:
+      StartingSpeed: 0
+      DestroyDelay: 0
+      UseAcceleration: 0
+      AccelerationMultiplier: 0
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 3
+    orbBehaviour:
+      StartingSpeed: 0
+      DestroyDelay: 0
+      UseAcceleration: 0
+      AccelerationMultiplier: 0
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 3
+    orbBehaviour:
+      StartingSpeed: 0
+      DestroyDelay: 0
+      UseAcceleration: 0
+      AccelerationMultiplier: 0
+      MoveToTarget: 0
+      TargetLocation: {x: 0, y: 0, z: 0}
+  - type: 3
+    orbBehaviour:
+      StartingSpeed: 0
+      DestroyDelay: 0
       UseAcceleration: 0
       AccelerationMultiplier: 0
       MoveToTarget: 0

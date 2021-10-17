@@ -9,7 +9,9 @@ public class AttackData
     {
         Cross,
         Cirlce,
-        Swirl
+        Swirl,
+        SpawnAirdrop,
+        AirDropAttack
     }
 
     public AttackType type;

@@ -6,6 +6,7 @@ public class BallSpawner : MonoBehaviour
 {
     public OrbData defaultOrb;
     public GameObject Spawnable;
+    public GameObject AirdropSpawnable;
     public float RotationSpeed;
     public List<AttackData> testAttacks = new List<AttackData>();
     public bool testMode;
@@ -40,6 +41,12 @@ public class BallSpawner : MonoBehaviour
                     case AttackData.AttackType.Swirl:
                         StartCoroutine(SwirlAttack(testAttacks[i].orbBehaviour));
                         break;
+                    case AttackData.AttackType.SpawnAirdrop:
+                        SpawnAirDrop();
+                        break;
+                    case AttackData.AttackType.AirDropAttack:
+                        StartCoroutine(AirdropAttack(testAttacks[i].orbBehaviour));
+                        break;
                     default:
                         break;
                 }
@@ -60,6 +67,12 @@ public class BallSpawner : MonoBehaviour
                         break;
                     case AttackData.AttackType.Swirl:
                         StartCoroutine(SwirlAttack(attacks[i].orbBehaviour));
+                        break;
+                    case AttackData.AttackType.SpawnAirdrop:
+                        SpawnAirDrop();
+                        break;
+                    case AttackData.AttackType.AirDropAttack:
+                        StartCoroutine(AirdropAttack(attacks[i].orbBehaviour));
                         break;
                     default:
                         break;
@@ -104,6 +117,28 @@ public class BallSpawner : MonoBehaviour
             Orb data = Instantiate(Spawnable, transform.position, transform.rotation).GetComponent<Orb>();
             data.StartData = orbBehaviour;
             yield return new WaitForSeconds(0.275f);
+        }
+    }
+
+    private void SpawnAirDrop()
+    {
+        Vector3 spawnPoint = new Vector3(transform.position.x + Random.Range(-10.0f, 10.0f), 0, transform.position.y + Random.Range(-10.0f, 10.0f));
+        GameObject go = Instantiate(AirdropSpawnable, spawnPoint, transform.rotation);
+        Destroy(go, 2.0f);
+    }
+
+    private IEnumerator AirdropAttack(OrbData orbBehaviour)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Quaternion bulletRot = transform.rotation;
+            for (int x = 0; x < 12; x++)
+            {
+                Orb data = Instantiate(Spawnable, transform.position, bulletRot).GetComponent<Orb>();
+                data.StartData = orbBehaviour;
+                bulletRot *= Quaternion.Euler(0, 20, 0);
+            }
+            yield return new WaitForSeconds(0.1375f);
         }
     }
 
