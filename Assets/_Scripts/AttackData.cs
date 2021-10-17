@@ -8,7 +8,8 @@ public class AttackData
     public enum AttackType
     {
         Cross,
-        Cirlce
+        Cirlce,
+        Swirl
     }
 
     public AttackType type;

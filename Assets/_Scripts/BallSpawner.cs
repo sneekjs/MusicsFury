@@ -7,6 +7,8 @@ public class BallSpawner : MonoBehaviour
     public OrbData defaultOrb;
     public GameObject Spawnable;
     public float RotationSpeed;
+    public List<AttackData> testAttacks = new List<AttackData>();
+    public bool testMode;
     public List<AttackData> attacks = new List<AttackData>();
 
     private void Start()
@@ -22,20 +24,48 @@ public class BallSpawner : MonoBehaviour
 
     private IEnumerator AttackPattern()
     {
-        for (int i = 0; i < attacks.Count; i++)
+        yield return new WaitForSeconds(1f);
+        if (testMode)
         {
-            yield return new WaitForSecondsRealtime(3);
-
-            switch (attacks[i].type)
+            for (int i = 0; i < testAttacks.Count; i++)
             {
-                case AttackData.AttackType.Cross:
-                    StartCoroutine(CrossAttack(attacks[i].orbBehaviour));
-                    break;
-                case AttackData.AttackType.Cirlce:
-                    CircleAttack(attacks[i].orbBehaviour);
-                    break;
-                default:
-                    break;
+                switch (testAttacks[i].type)
+                {
+                    case AttackData.AttackType.Cross:
+                        StartCoroutine(CrossAttack(testAttacks[i].orbBehaviour));
+                        break;
+                    case AttackData.AttackType.Cirlce:
+                        CircleAttack(testAttacks[i].orbBehaviour);
+                        break;
+                    case AttackData.AttackType.Swirl:
+                        StartCoroutine(SwirlAttack(testAttacks[i].orbBehaviour));
+                        break;
+                    default:
+                        break;
+                }
+                yield return new WaitForSecondsRealtime(3);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < attacks.Count; i++)
+            {
+                switch (attacks[i].type)
+                {
+                    case AttackData.AttackType.Cross:
+                        StartCoroutine(CrossAttack(attacks[i].orbBehaviour));
+                        break;
+                    case AttackData.AttackType.Cirlce:
+                        CircleAttack(attacks[i].orbBehaviour);
+                        break;
+                    case AttackData.AttackType.Swirl:
+                        StartCoroutine(SwirlAttack(attacks[i].orbBehaviour));
+                        break;
+                    default:
+                        break;
+                }
+                yield return new WaitForSecondsRealtime(3);
+
             }
         }
     }
@@ -64,6 +94,16 @@ public class BallSpawner : MonoBehaviour
             Orb data = Instantiate(Spawnable, transform.position, bulletRot).GetComponent<Orb>();
             data.StartData = orbBehaviour;
             bulletRot *= Quaternion.Euler(0, 2, 0);
+        }
+    }
+
+    private IEnumerator SwirlAttack(OrbData orbBehaviour)
+    {
+        for (int i = 0; i < 8*8; i++)
+        {
+            Orb data = Instantiate(Spawnable, transform.position, transform.rotation).GetComponent<Orb>();
+            data.StartData = orbBehaviour;
+            yield return new WaitForSeconds(0.275f);
         }
     }
 
